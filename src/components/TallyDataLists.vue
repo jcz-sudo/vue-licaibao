@@ -1,8 +1,8 @@
 <template>
   <div class="tallyData_lists">
     <ul>
-      <li v-for="(item, index) in tallyData" :key="index">
-        <el-row class="tallyData_item">
+      <li v-for="(item, index) in tallyData" :key="index" >
+        <el-row class="tallyData_item" @click.native="deleteItem()">
           <el-col class="tag">{{ item.tag }}</el-col>
           <el-col class="remark">{{ item.remark }}</el-col>
           <el-col :class="['price', item.type === 0 ? 'expense' : 'income']"
@@ -23,6 +23,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  methods: {
+    deleteItem(){
+      console.log(1111)
+    }
   },
   filters: {
     filterDate,

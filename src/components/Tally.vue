@@ -36,7 +36,7 @@
     <!-- 主要部分 -->
     <section class="main">
       <!-- input输入框 -->
-      <section class="input_wrap">
+      <form class="input_wrap" autocomplete="off">
         <!-- 备注 -->
         <label for="remark" class="remark_wrap">
           <span class="remark">备注</span>
@@ -46,6 +46,16 @@
             id="remark"
             v-model="remark"
             placeholder="请输入备注"
+            required
+          />
+        </label>
+        <label for="remark" class="remark_wrap">
+          <span class="remark">日期</span>
+          <input
+            class="remarkInput"
+            type="date"
+            v-model="date"
+            required
           />
         </label>
         <!-- 金额 -->
@@ -53,7 +63,7 @@
           <span class="title">金额</span>
           <p class="price">{{ price }}</p>
         </div>
-      </section>
+      </form>
 
       <!-- 计算器 -->
       <section class="calc_wrap">
@@ -84,6 +94,7 @@ export default {
       type: 0, // 记账的类型， 支出为0，收入为1
       price: 0, // 金额
       remark: "", // 备注
+      date:"",//日期
       remarkMaxLength: 10, // 备注的最大长度
       selectedTag: this.$store.getters.getTags[0], //选中的标签，初始化默认选第一个
       tags: this.$store.getters.getTags, // 标签
@@ -126,8 +137,8 @@ export default {
 
     // 当点击确认时，校验并提交信息
     submit() {
-      if (this.remark.trim() && Number(this.price)) {
-        let createdTime = new Date().getTime();
+      if (this.remark.trim() && Number(this.price)&&this.date) {
+        let createdTime = this.date;
         let type = this.type;
         let price = this.price;
         let remark = this.remark;
@@ -138,9 +149,10 @@ export default {
         // 提交完数据把金额和备注初始化
         this.price = 0;
         this.remark = "";
+        this.date = "";
         this.$message.success("保存成功");
       } else {
-        this.$message.info("亲，备注不能为空，金额也不能为0哦");
+        this.$message.info("必选项不能为空");
       }
     },
   },

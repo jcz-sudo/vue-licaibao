@@ -17,7 +17,7 @@
     <section class="lists">
       <header class="lists_header">
         <i class="el-icon-document icon"></i>
-        <span class="recently">最近</span>
+        <span class="recently">最近(7条记账)</span>
       </header>
       <!-- TallyDataLists组件 -->
       <tally-data-lists
