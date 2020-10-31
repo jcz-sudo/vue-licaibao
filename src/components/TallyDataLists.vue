@@ -2,13 +2,14 @@
   <div class="tallyData_lists">
     <ul>
       <li v-for="(item, index) in tallyData" :key="index" >
-        <el-row class="tallyData_item" @click.native="deleteItem()">
+        <el-row class="tallyData_item">
           <el-col class="tag">{{ item.tag }}</el-col>
           <el-col class="remark">{{ item.remark }}</el-col>
           <el-col :class="['price', item.type === 0 ? 'expense' : 'income']"
             >￥{{ item.price }}
           </el-col>
           <el-col class="time">{{ item.createdTime | filterDate }}</el-col>
+          <el-col class="el-icon-delete" style="text-align:center" @click.native="deleteItem(index)"></el-col>
         </el-row>
       </li>
     </ul>
@@ -25,8 +26,9 @@ export default {
     },
   },
   methods: {
-    deleteItem(){
-      console.log(1111)
+    deleteItem(index){
+      console.log(index)
+      this.$store.commit("deleteItem",index)
     }
   },
   filters: {
